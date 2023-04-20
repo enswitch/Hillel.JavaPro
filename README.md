@@ -1,0 +1,1 @@
+My expectations from java pro course is to master deep knowledge of java, start working with Spring and Hybernate, learn other useful topics to become java developer
