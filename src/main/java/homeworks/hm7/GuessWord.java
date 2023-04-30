@@ -7,6 +7,7 @@ public class GuessWord {
     public void guessRandomWord(String[] words) {
         Random random = new Random();
         String secretWord = words[random.nextInt(words.length)];
+
         boolean isGuessed = false;
         System.out.println("System guessed the word, try to find it out! Use lowercase only!");
 
@@ -18,6 +19,7 @@ public class GuessWord {
         while (!isGuessed) {
             Scanner scan = new Scanner(System.in);
             String userInput = scan.nextLine();
+
             for (int i = 0; i < userInput.length(); i++) {
                 char c = userInput.charAt(i);
                 if (c >= 'A' && c <= 'Z') {
@@ -39,6 +41,7 @@ public class GuessWord {
             }
         }
     }
+
 
     public static void main(String[] args) {
         GuessWord player = new GuessWord();
