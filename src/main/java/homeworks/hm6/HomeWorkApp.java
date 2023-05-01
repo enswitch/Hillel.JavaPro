@@ -66,9 +66,9 @@ public class HomeWorkApp {
 
     public boolean isLeapYear(int year) {
         if (year % 4 != 0) {
-            return true;
-        } else if (year % 100 != 0) {
             return false;
+        } else if (year % 100 != 0) {
+            return true;
         } else {
             return year % 400 == 0;
         }
@@ -85,6 +85,6 @@ public class HomeWorkApp {
         hm.printPositiveOrNegativeNumber(-1);
         System.out.println(hm.isPositiveOrNegativeNumber(0));
         hm.printStringIntTimes("Error", 3);
-        System.out.println(hm.isLeapYear(2100));
+        System.out.println(hm.isLeapYear(1604));
     }
 }
