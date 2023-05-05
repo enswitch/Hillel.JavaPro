@@ -14,10 +14,10 @@ public class StringOperations {
     }
 
     public int findWordPosition(String source, String target) {
-        if (source.contains(target)) {
-            return source.indexOf(target);
-        } else {
+        if (!source.contains(target)) {
             return -1;
+        } else {
+            return source.indexOf(target);
         }
     }
 
@@ -39,7 +39,7 @@ public class StringOperations {
     public static void main(String[] args) {
         StringOperations str = new StringOperations();
         System.out.println("Char repeated " + str.findSymbolOccurance("Hillel hillel", 'l') + " times in a string");
-        System.out.println("Target in source starts at index: " + str.findWordPosition("Hillel", "lel"));
+        System.out.println("Target in source starts at index: " + str.findWordPosition("Hillel", "el"));
         System.out.println("Reverse string: " + str.stringReverse("Hillel hillel"));
         System.out.println("String is a palindrome: " + str.isPalindrome("repaper"));
 

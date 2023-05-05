@@ -3,6 +3,8 @@ package homeworks.hm7;
 import java.util.Arrays;
 import java.util.Random;
 import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class GuessWord {
 
@@ -22,11 +24,10 @@ public class GuessWord {
             String userInput = scan.nextLine();
             boolean hasUppercase = false;
 
-            for (int i = 0; i < userInput.length(); i++) {
-                if (userInput.charAt(i) >= 'A' && userInput.charAt(i) <= 'Z') {
-                    hasUppercase = true;
-                    break;
-                }
+            Pattern pattern = Pattern.compile("[A-Z]");
+            Matcher matcher = pattern.matcher(userInput);
+            if (matcher.find()) {
+                hasUppercase = true;
             }
 
             if (hasUppercase) {
@@ -61,7 +62,7 @@ public class GuessWord {
         GuessWord player = new GuessWord();
         String[] words = {"apple", "orange", "lemon", "banana", "apricot", "avocado",
                 "broccoli", "carrot", "cherry", "garlic", "grape", "melon", "leak",
-                "kiwi", "mango", "mushroom", "nut", "olive", " pea", "peanut", "pear",
+                "kiwi", "mango", "mushroom", "nut", "olive", "pea", "peanut", "pear",
                 "pepper", "pineapple", "pumpkin", "potato"};
 
         player.guessRandomWord(words);
