@@ -1,56 +1,58 @@
 package homeworks.hm7;
 
-import java.util.Arrays;
 import java.util.Random;
 import java.util.Scanner;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class GuessWord {
 
     public void guessRandomWord(String[] words) {
         Random random = new Random();
-        String guessWord = words[random.nextInt(words.length)];
+        String guessedWord = words[random.nextInt(words.length)];
 
         boolean isGuessed = false;
-        System.out.println("System guessed a word, try to find it out. Use lowercase only!");
-
-        char[] hashes = new char[15];
-        Arrays.fill(hashes, '#');
+        final int HASHES_LENGTH = 15;
+        StringBuilder hashes = new StringBuilder();
+        for (int i = 0; i < HASHES_LENGTH; i++) {
+            hashes.append('#');
+        }
 
         Scanner scan = new Scanner(System.in);
-
         while (!isGuessed) {
             String userInput = scan.nextLine();
             boolean hasUppercase = false;
 
-            Pattern pattern = Pattern.compile("[A-Z]");
-            Matcher matcher = pattern.matcher(userInput);
-            if (matcher.find()) {
-                hasUppercase = true;
+            for (char c : userInput.toCharArray()) {
+                if (Character.isUpperCase(c)) {
+                    hasUppercase = true;
+                    break;
+                }
             }
 
             if (hasUppercase) {
                 System.out.println("Not allowed to use uppercase letters!");
-            } else if (guessWord.equals(userInput)) {
+            } else if (guessedWord.equals(userInput)) {
                 System.out.println("Congratulations! You guessed the word!");
                 isGuessed = true;
             } else {
                 boolean allLettersOpened = true;
-                for (int i = 0; i < guessWord.length(); i++) {
-                    if (i < userInput.length() && userInput.charAt(i) == guessWord.charAt(i)) {
-                        hashes[i] = userInput.charAt(i);
+                for (int i = 0; i < guessedWord.length(); i++) {
+                    if (i < userInput.length() && userInput.charAt(i) == guessedWord.charAt(i)) {
+                        hashes.setCharAt(i, userInput.charAt(i));
                     }
-                    if (hashes[i] != guessWord.charAt(i)) {
+                    if (hashes.charAt(i) != guessedWord.charAt(i)) {
                         allLettersOpened = false;
                     }
                 }
                 System.out.println("You missed, try again!");
-                System.out.println(new String(hashes));
+                System.out.println(hashes);
+
                 if (allLettersOpened) {
                     System.out.println("It seems like you open all letters but not guess the word totally, we need to hide it again and set the new word!");
-                    guessWord = words[random.nextInt(words.length)];
-                    Arrays.fill(hashes, '#');
+                    guessedWord = words[random.nextInt(words.length)];
+                    hashes = new StringBuilder();
+                    for (int i = 0; i < HASHES_LENGTH; i++) {
+                        hashes.append('#');
+                    }
                 }
             }
         }
